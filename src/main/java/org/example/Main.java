@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         ArrayList<User> usuarios = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+        boolean usuarioValidado = false;
         int opcao = 0;
 
         while (opcao != 3) {
@@ -30,12 +31,70 @@ public class Main {
                             User usuario = usuarios.get(i);
                             if (logNome.equals(usuario.nome) && logSenha.equals(usuario.senha)) {
                                 System.out.println("login efetuado com sucesso!");
-                                int usuarioValidado = 1;
+                                usuarioValidado = true;
+                                while (usuarioValidado == true) {
+
+                                    int opcaoLogin = 0;
+                                    System.out.println("======TELA DE OPERAÇÕES======");
+                                    System.out.println("BEM VINDO "+usuario.nome+"!");
+                                    System.out.println("ESCOLHA ENTRE AS OPERAÇÕES A SEGUIR:");
+                                    System.out.println("1 - CONSULTAR SALDO \n 2 - DEPÓSITO \n 3 - SAQUE \n 4 - SAIR");
+                                    opcaoLogin = scanner.nextInt();
+                                    scanner.nextLine();
+
+                                    switch (opcaoLogin) {
+                                        case 1:
+                                            usuario.mostrarSaldo();
+                                            System.out.println("Voltando para o Menu de Usuário...");
+
+                                            break;
+                                        case 2:
+                                            System.out.println("Digite o valor que deseja depositar:");
+                                            double valorDeposito = scanner.nextDouble();
+                                            scanner.nextLine();
+                                            usuario.saldo += valorDeposito;
+                                            System.out.println("Saldo atualizado com sucesso!");
+
+                                            break;
+                                        case 3:
+                                            if(usuario.saldo>0){
+                                                System.out.println("Digite o valor que deseja sacar: ");
+                                                double valorSacar = scanner.nextDouble();
+                                                scanner.nextLine();
+                                                if(valorSacar<=usuario.saldo){
+                                                    usuario.saldo -= valorSacar;
+                                                    System.out.println("Saldo atualizado com sucesso!");
+
+                                                }else{
+                                                    System.out.println("Saldo insuficiente para sacar!");
+                                                    System.out.println("Retornando para o menu de usuário...");
+                                                }
+
+                                            }
+                                            break;
+                                        case 4:
+                                                usuarioValidado = false;
+                                            System.out.println("voltando para o menu principal...");
+                                            break;
+                                        default:
+                                            System.out.println("Opção inválida. \n Retornando para o menu de usuário...");
+
+
+
+                                    }
+
+
+                                }
+
+
+                            }else{
+                                System.out.println("Nome de usuário ou senha incorretos");
+                                System.out.println("Retornando ao Menu principal...");
                             }
                         }
                     } else {
                         System.out.println("Nenhum usuário encontrado");
-                        int usuarioValidado = 0;
+
                     }
 
                     break;
