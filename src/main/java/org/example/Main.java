@@ -39,6 +39,8 @@ public class Main {
                                     System.out.println("BEM VINDO "+usuario.nome+"!");
                                     System.out.println("ESCOLHA ENTRE AS OPERAÇÕES A SEGUIR:");
                                     System.out.println("1 - CONSULTAR SALDO \n 2 - DEPÓSITO \n 3 - SAQUE \n 4 - SAIR");
+                                    System.out.println(opcaoLogin);
+
                                     opcaoLogin = scanner.nextInt();
                                     scanner.nextLine();
 
@@ -49,11 +51,18 @@ public class Main {
 
                                             break;
                                         case 2:
+
+                                            try {
                                             System.out.println("Digite o valor que deseja depositar:");
                                             double valorDeposito = scanner.nextDouble();
-                                            scanner.nextLine();
-                                            usuario.saldo += valorDeposito;
-                                            System.out.println("Saldo atualizado com sucesso!");
+                                                scanner.nextLine();
+                                                usuario.saldo += valorDeposito;
+                                                System.out.println("Saldo atualizado com sucesso!");
+                                            } catch (Exception e) {
+                                                System.out.println("entrada inválida");
+                                                System.out.println("retornando ao menu do usuario...");
+                                                scanner.nextLine();
+                                            }
 
                                             break;
                                         case 3:
